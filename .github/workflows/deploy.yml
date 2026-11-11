@@ -1,0 +1,39 @@
+# Despliegue automático a Vercel (producción) en cada push a main. Mismo patrón que Chess.
+# Publica solo si existe el secreto VERCEL_TOKEN; sin él, pasa las pruebas y termina en verde.
+name: Desplegar en Vercel
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+concurrency:
+  group: produccion
+  cancel-in-progress: true
+env:
+  VERCEL_ORG_ID: ${{ vars.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ vars.VERCEL_PROJECT_ID }}
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Pruebas del motor
+        run: node tools/qa/engine.test.mjs
+      - name: Comprobar que existe el token
+        id: tok
+        env:
+          T: ${{ secrets.VERCEL_TOKEN }}
+        run: |
+          if [ -n "$T" ]; then echo "ok=1" >> "$GITHUB_OUTPUT"
+          else echo "::notice::Sin secreto VERCEL_TOKEN: se omite la publicación (se publica a mano)."; fi
+      - name: Descargar ajustes del proyecto
+        if: steps.tok.outputs.ok == '1'
+        run: npx --yes vercel@latest pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Construir
+        if: steps.tok.outputs.ok == '1'
+        run: npx --yes vercel@latest build --prod --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Publicar
+        if: steps.tok.outputs.ok == '1'
+        run: npx --yes vercel@latest deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}

@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>2DFaser</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="2DFaser">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#14161d">
+<link rel="preload" href="/fonts/bricolage-grotesque-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/css/app.css">
+</head>
+<body>
+
+<!-- Refugio -->
+<section id="home" class="screen" hidden>
+  <div class="page">
+    <header class="top">
+      <div><p class="kicker">Valdeluz</p><h1>El Refugio</h1></div>
+      <div class="purse"><span class="coin"></span><b id="hGold">0</b></div>
+    </header>
+    <div id="hQuest" class="quest"></div>
+    <div class="row-title"><h2>Construir</h2><p id="hHero" class="muted"></p></div>
+    <div id="hBuild" class="builds"></div>
+    <div id="hChain" class="chain"></div>
+    <p id="hStats" class="muted small"></p>
+  </div>
+</section>
+
+<!-- Mapa de la expedición -->
+<section id="map" class="screen" hidden>
+  <header class="hud">
+    <div class="hud-l"><b id="mQuest"></b><span id="mGoal" class="muted"></span></div>
+    <div class="stats" id="mStats"></div>
+  </header>
+  <div id="mapWrap" class="mapwrap"><svg id="mapSvg"></svg></div>
+  <p class="hint" id="mHint">Elige tu camino.</p>
+</section>
+
+<!-- Combate -->
+<section id="fight" class="screen" hidden>
+  <header class="hud">
+    <div class="hud-l"><b id="fTitle">Combate</b><span id="fTurn" class="muted"></span></div>
+    <div class="stats" id="fStats"></div>
+  </header>
+  <div class="arena">
+    <div id="stage"><canvas id="board"></canvas></div>
+    <aside class="side">
+      <div id="foes" class="foes" aria-label="Enemigos"></div>
+      <p id="hint" class="hint"></p>
+      <nav id="acts" class="acts"></nav>
+      <div class="turnrow">
+        <button type="button" id="undo" class="ghost">↶ Deshacer</button>
+        <button type="button" id="endTurn" class="main">Fin del turno</button>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<div id="modal" class="modal" hidden>
+  <div class="card" role="dialog" aria-modal="true" aria-labelledby="mdTitle">
+    <p id="mdKicker" class="kicker"></p>
+    <h2 id="mdTitle"></h2>
+    <p id="mdText"></p>
+    <div id="mdChoices" class="choices"></div>
+  </div>
+</div>
+
+<script type="module" src="/js/app.js"></script>
+</body>
+</html>

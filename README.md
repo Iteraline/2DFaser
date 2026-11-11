@@ -1,52 +1,32 @@
 # 2DFaser
 
-## Repository State
+Juego de estrategia por turnos con **un solo héroe**. El ciclo es **explorar → luchar → volver al refugio → mejorar → llegar más lejos**. Las cuatro gestas son romper la maldición, recuperar el tesoro, rescatar a la princesa y matar al dragón Ígnar. Sigue el mismo patrón que Chess, Wellness y massage.
 
-This repository does not currently contain an application implementation.
+- **Web**: `web/` es estático y no necesita compilación (JavaScript de navegador, canvas 2D, sin librerías ni CDN). Es una PWA que funciona sin red una vez instalada.
+- **Diseño**: `docs/DISENO.md` recoge las referencias con datos verificados, las reglas, los enemigos, el refugio y las gestas.
+- **Guardado**: de momento se guarda en el dispositivo (`localStorage`). En la fase 2 se añadirán perfiles y nube con Supabase (esquema `faser`), como en Chess.
 
-At the time this document was written, the tracked tree contains only:
+## Estructura
 
-- `.gitkeep`
+| Ruta | Qué es |
+|---|---|
+| `web/js/engine.js` | Reglas del combate, puras y deterministas: zonas de peligro, movimiento, acciones, empujes, trampas, IA enemiga y refuerzos |
+| `web/js/run.js` | Expedición (mapa de nodos, encuentros, eventos, oro) y refugio (edificios) |
+| `web/js/data.js` | Enemigos, gestas, edificios, eventos y estadísticas del héroe |
+| `web/js/render.js` | Tablero en canvas y animación de los eventos del motor |
+| `web/js/app.js` | Pantallas: refugio, mapa, combate y ventanas |
+| `web/js/store.js` | Guardado local |
+| `tools/qa/engine.test.mjs` | Pruebas de las reglas (Node) |
+| `tools/qa/sim.mjs` + `bot.mjs` | Simulación de equilibrio: un bot que mira 1 turno por delante juega expediciones enteras de cada gesta |
+| `tools/qa/smoke.mjs` | Prueba de humo en Chromium (iPhone e iPad) que juega con la interfaz real |
 
-Git history also indicates a single bootstrap commit (`Initialize repository`), which means there is no source code, build configuration, dependency manifest, UI, backend, or asset pipeline available in this checkout.
+## Probar
 
-## What Is Behind This App Today
+```
+node tools/qa/engine.test.mjs
+node tools/qa/devserver.mjs 8000      # http://localhost:8000
+node tools/qa/smoke.mjs /tmp          # requiere Playwright y Chromium
+node tools/qa/sim.mjs 40              # equilibrio (≈2 min)
+```
 
-From the repository contents, the honest technical conclusion is:
-
-- there is no app logic checked into this repository yet
-- there is no architecture to trace from entry point to runtime behavior
-- there are no modules, services, screens, or APIs to document
-- there is no deployment or packaging flow defined in version control
-
-In other words, this repository is currently a placeholder for the future `2DFaser` app rather than an implemented application.
-
-## What Cannot Be Inferred Yet
-
-Because no code or configuration is present, the following are unknown:
-
-- target platform: web, desktop, mobile, game, or CLI
-- language and framework choices
-- rendering approach for any 2D feature set
-- data model and persistence strategy
-- integration points, external APIs, or file formats
-- test strategy, release process, and runtime requirements
-
-Any stronger claim than that would be speculation rather than documentation.
-
-## Suggested Architecture Sections Once Code Exists
-
-When the app is added, this documentation should be expanded to cover:
-
-1. Entry points and startup flow
-2. Core domain model
-3. Rendering or processing pipeline
-4. UI structure and state management
-5. Storage, import/export, and project format
-6. External dependencies and integrations
-7. Build, packaging, and release flow
-8. Test strategy and quality gates
-
-## Current Conclusion
-
-`2DFaser` is currently an initialized Git repository with no application source. The next meaningful step is to add the first implementation files or import the existing app into this repository, after which a real architecture document can be produced.
+Despliegue: ver `docs/despliegue.md`. Estado y pendientes: `docs/ESTADO.md`.
