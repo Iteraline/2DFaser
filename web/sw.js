@@ -1,9 +1,9 @@
-/* Service worker de 2DFaser (mismo criterio que Chess).
+/* Service worker de A Lápiz (mismo criterio que Chess).
    - App (página, CSS, JS): red primero; sin red, la copia guardada. Cada despliegue llega solo al abrir con conexión.
    - Fuentes e iconos: caché primero.
    Cambia CACHE solo si cambia la lógica de este archivo. */
-const CACHE = 'faser-sw1';
-const APP = ['/', '/css/app.css', '/js/app.js', '/js/engine.js', '/js/run.js', '/js/data.js', '/js/render.js', '/js/rng.js', '/js/store.js', '/manifest.json'];
+const CACHE = 'alapiz-sw1';
+const APP = ['/', '/css/app.css', '/js/app.js', '/js/maze.js', '/js/game.js', '/js/draw.js', '/js/pilot.js', '/js/data.js', '/js/rng.js', '/js/store.js', '/manifest.json'];
 const STATIC = ['/icons/icon-192.png', '/icons/icon-512.png', '/icons/apple-touch-icon.png',
   '/fonts/bricolage-grotesque-latin-700-normal.woff2', '/fonts/bricolage-grotesque-latin-800-normal.woff2',
   '/fonts/figtree-latin-400-normal.woff2', '/fonts/figtree-latin-700-normal.woff2'];

@@ -1,13 +1,13 @@
 {
-  "name": "2DFaser",
-  "short_name": "2DFaser",
-  "description": "Estrategia por turnos con un solo héroe.",
+  "name": "A Lápiz",
+  "short_name": "A Lápiz",
+  "description": "Laberintos de cuaderno a lápiz, en tiempo real.",
   "lang": "es",
   "start_url": "/",
   "display": "standalone",
   "orientation": "any",
-  "background_color": "#14161d",
-  "theme_color": "#14161d",
+  "background_color": "#1b1d24",
+  "theme_color": "#1b1d24",
   "icons": [
     { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
     { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png" },

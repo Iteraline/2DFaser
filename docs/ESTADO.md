@@ -1,38 +1,49 @@
-# Estado del proyecto
+# Estado: A Lápiz (piloto)
 
-## Hecho (fase 1)
-- Combate completo:
-  - 8×8 con rocas y simas
-  - espada, arco, lanza, trampas y carga a caballo
-  - armadura
-  - empujes (contra la sima, contra rocas y contra otros enemigos)
-  - zonas de peligro visibles y turno enemigo determinista
-  - refuerzos avisados cada 6 turnos (máximo 3) para que no haya atascos
-- 5 enemigos y 4 jefes (Lobo Alfa, Rey Bandido, Bruja y el dragón Ígnar, cuyo aliento quema también a sus aliados).
-- Expedición con mapa de nodos: combate, élite, botín, encuentro, hoguera (descansar o retirarse con el oro) y jefe.
-- Refugio con 6 edificios y 15 mejoras. Campaña de 4 gestas. Prólogo con tutorial contextual.
-- PWA (manifiesto, service worker y funcionamiento sin red) y guardado local.
-- Pruebas:
-  - `engine.test.mjs`: unas 40 comprobaciones de reglas
-  - `smoke.mjs`: juega expediciones reales con la interfaz en iPhone e iPad
-  - `sim.mjs`: equilibrio
+## Hecho
+- Cuaderno de Matemáticas: 10 páginas generadas con semilla y validadas por un resolutor. Cada partida es distinta.
+- Reglas:
+  - trazo permanente (no se cruza)
+  - repasar gasta el doble de mina
+  - mina limitada, con sacapuntas para recargar
+  - visión limitada, con niebla y lo ya visto en tenue
+  - la goma sigue tu recorrido exacto, más lenta que tú: solo te alcanza si te paras o dudas, y lo que borra queda emborronado
+  - media vuelta inmediata a mitad de casilla
+  - tocar para parar
+- Símbolos:
+  - ➜ flechas de sentido único
+  - portales de colores (●▲■)
+  - ★ estrellas
+  - sacapuntas
+  - antorcha
+  - ojo (señala la salida)
+  - ♥ corazón
+  - llave y candado
+  - pico (atraviesa un muro deslizando contra él estando parado)
+  - borrones de tinta que patrullan
+- Pasar la hoja: la fila del agujero de salida es la fila de entrada de la página siguiente.
+- 3 vidas. Puntuación por estrellas, mina sobrante, tiempo y trazo limpio. Lápiz de oro, plata o bronce por página. Récord local.
+- Portada con demostración automática. PWA. Vibración en móvil.
 
-## Equilibrio (bot de 1 turno, 40 expediciones por caso, camino solo de combates)
-| Gesta | Sin mejoras | Refugio medio | Alto | Máximo |
-|---|---|---|---|---|
-| Bosque (Lobo Alfa) | 90 % | 85 % | 93 % | 98 % |
-| Ruinas (Rey Bandido) | 30 % | 40 % | 28 % | 68 % |
-| Torre (Bruja) | 8 % | 10 % | 33 % | 60 % |
-| Montaña (Ígnar) | 0 % | 0 % | 3 % | 15 % |
+## Dificultad medida (explorador sin mapa, 100 páginas por nivel)
+| Pág | Supera | Tiempo medio |
+|---|---|---|
+| 1 | 93 % | 6,7 s |
+| 2 | 90 % | 9,1 s |
+| 3 | 74 % | 9,8 s |
+| 4 | 75 % | 8,6 s |
+| 5 | 74 % | 12,6 s |
+| 6 (llave) | 42 % | 17,1 s |
+| 7 | 56 % | 13,2 s |
+| 8 | 47 % | 14,6 s |
+| 9 | 41 % | 16,2 s |
+| 10 | 37 % | 12,6 s |
 
-Medido antes de añadir los refuerzos. Casi todas las derrotas del bot son atascos y no muertes. Un jugador humano arriesgará más, así que la curva real está por validar jugando.
+Las muertes por tinta y por quedar encerrado pesan mucho en el bot. Hay que validar con partidas reales.
 
-## Decisiones
-- El daño recibido no depende del azar: si acabas el turno fuera del rojo, no recibes daño (Hoplite, Into the Breach).
-- La carga a caballo gasta el movimiento y la acción, y hace 2 de daño (3 a nivel 2). Con 3 de daño y sin gastar el movimiento rompía el equilibrio: era la mejora que más subía la tasa de victoria en la simulación.
-- Si caes, conservas el 50 % del oro. Retirarte en la hoguera te deja el 100 %, pero pierdes el avance de la gesta.
-
-## Pendiente
-- Fase 2: perfiles, nube (Supabase `faser`), salón de la fama y reto diario con semilla.
-- Fase 3: arte, animación, sonido, más eventos y enemigos.
-- Ajustar el equilibrio con partidas reales: la Montaña probablemente necesite un dragón algo más débil.
+## Pendiente (siguientes iteraciones)
+- Sonido (rasgueo del lápiz, paso de hoja).
+- Clip (punto de control), regla, goma como objeto, mancha de café y pliegues.
+- Editor de laberintos y compartir con un enlace («¿Te atreves?»).
+- Reto diario y clasificación.
+- Otros cuadernos: Lengua (rayas), Dibujo (sin cuadrícula), Música (pentagrama).

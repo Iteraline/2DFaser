@@ -19,8 +19,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: Pruebas del motor
-        run: node tools/qa/engine.test.mjs
+      - name: Pruebas de reglas y generador
+        run: node tools/qa/game.test.mjs
       - name: Comprobar que existe el token
         id: tok
         env:
