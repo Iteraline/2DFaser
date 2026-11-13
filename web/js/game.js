@@ -1,8 +1,8 @@
 // Simulación en tiempo real de una página. Pura (sin DOM): update(g, dt) avanza el mundo.
 // Reglas: el trazo es permanente (no se cruza; volver atrás = repasar, gasta doble), la mina se gasta,
 // la goma avanza por tu trazo borrándolo y, si te alcanza, pierdes una vida.
-import { DX, DY, nb, pk, passable, portalOf, open, cx, cy } from './maze.js';
-import { SPEED, PAGES, TORCH_TIME, EYE_TIME, TORCH_RADIUS } from './data.js';
+import { DX, DY, nb, pk, passable, portalOf, open, cx, cy } from './maze.js?v=3';
+import { SPEED, PAGES, TORCH_TIME, EYE_TIME, TORCH_RADIUS } from './data.js?v=3';
 
 export function newGame(page, lives) {
   const cfg = PAGES[page.n];

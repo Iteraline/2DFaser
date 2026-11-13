@@ -4,4 +4,5 @@ set -e
 cd "$(dirname "$0")/../.."
 node tools/qa/game.test.mjs
 node tools/qa/smoke.mjs "${1:-/tmp}"
+node tools/qa/responsive.mjs "${1:-/tmp}"
 if [ "$2" = "--sim" ]; then node tools/qa/sim.mjs 100; fi

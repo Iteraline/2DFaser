@@ -18,9 +18,9 @@ button.main { background: var(--pencil); color: #2b2200; border-color: transpare
 button.big { width: 100%; min-height: 52px; font-size: 18px; }
 .muted { color: var(--muted); }
 
-.app { position: fixed; inset: 0; display: flex; flex-direction: column; padding: env(safe-area-inset-top, 0) env(safe-area-inset-right, 0) env(safe-area-inset-bottom, 0) env(safe-area-inset-left, 0); }
+.app { position: fixed; top: 0; right: 0; bottom: 0; left: 0; display: flex; flex-direction: column; padding: env(safe-area-inset-top, 0px) env(safe-area-inset-right, 0px) env(safe-area-inset-bottom, 0px) env(safe-area-inset-left, 0px); }
 .stage { position: relative; flex: 1; min-height: 0; touch-action: none; }
-.stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.stage canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: block; }
 
 /* Marcador */
 .hud { background: var(--panel); border-bottom: 1px solid var(--line); padding: 8px 12px; display: flex; flex-direction: column; gap: 6px; z-index: 2; }
@@ -38,12 +38,12 @@ button.big { width: 100%; min-height: 52px; font-size: 18px; }
 .inv { display: flex; gap: 6px; min-height: 24px; }
 .chip { display: inline-flex; align-items: center; gap: 3px; background: #2e323e; border-radius: 999px; padding: 2px 8px 2px 4px; font: 700 13px var(--body); }
 
-.toast { position: fixed; left: 50%; bottom: calc(18px + env(safe-area-inset-bottom, 0)); transform: translateX(-50%); max-width: min(92vw, 520px); margin: 0; padding: 10px 16px; border-radius: 14px; background: rgba(20, 22, 28, 0.88); color: var(--ink); font-weight: 700; text-align: center; z-index: 5; transition: opacity 0.4s; pointer-events: none; }
+.toast { position: fixed; left: 50%; bottom: calc(18px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); max-width: min(92vw, 520px); margin: 0; padding: 10px 16px; border-radius: 14px; background: rgba(20, 22, 28, 0.88); color: var(--ink); font-weight: 700; text-align: center; z-index: 5; transition: opacity 0.4s; pointer-events: none; }
 .toast.out { opacity: 0; }
 
 /* Portada */
-.title { position: fixed; inset: 0; display: grid; place-items: center; padding: 16px; background: linear-gradient(180deg, rgba(27, 29, 36, 0.35), rgba(27, 29, 36, 0.8)); z-index: 3; }
-.cover { width: 100%; max-width: 380px; background: #2456a6; color: #fff; border-radius: 10px 18px 18px 10px; padding: 26px 22px 22px 34px; position: relative; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5); border-left: 10px solid #1a3f7c; }
+.title { position: fixed; top: 0; right: 0; bottom: 0; left: 0; display: flex; align-items: center; justify-content: center; overflow-y: auto; -webkit-overflow-scrolling: touch; padding: calc(16px + env(safe-area-inset-top, 0px)) 16px calc(16px + env(safe-area-inset-bottom, 0px)); background: linear-gradient(180deg, rgba(27, 29, 36, 0.35), rgba(27, 29, 36, 0.8)); z-index: 3; }
+.cover { width: 100%; max-width: 380px; margin: auto; flex: none; background: #2456a6; color: #fff; border-radius: 10px 18px 18px 10px; padding: 26px 22px 22px 34px; position: relative; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5); border-left: 10px solid #1a3f7c; }
 .cover::before { content: ''; position: absolute; left: -10px; top: 14px; bottom: 14px; width: 10px; background: repeating-linear-gradient(180deg, transparent 0 14px, #c8ccd6 14px 20px); border-radius: 3px; }
 .cover .label { display: inline-block; background: #fbf8ef; color: #2b2a27; padding: 4px 10px; border-radius: 4px; font: 700 13px var(--body); margin: 0 0 10px; }
 .cover h1 { font: 800 54px/0.95 var(--display); margin: 4px 0 8px; letter-spacing: -0.02em; }
@@ -52,7 +52,7 @@ button.big { width: 100%; min-height: 52px; font-size: 18px; }
 .how { margin: 14px 0 0; padding: 12px 0 0 18px; border-top: 1px dashed rgba(255, 255, 255, 0.3); font-size: 14px; color: #dbe6ff; display: grid; gap: 4px; }
 
 /* Ventana */
-.modal { position: fixed; inset: 0; background: rgba(8, 9, 12, 0.7); display: grid; place-items: center; padding: 16px; z-index: 10; }
+.modal { position: fixed; top: 0; right: 0; bottom: 0; left: 0; background: rgba(8, 9, 12, 0.7); display: grid; place-items: center; padding: 16px; z-index: 10; }
 .card { width: 100%; max-width: 400px; background: var(--paper); color: #2b2a27; border-radius: 16px; padding: 22px; display: flex; flex-direction: column; gap: 8px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5); background-image: linear-gradient(#d3deea 1px, transparent 1px), linear-gradient(90deg, #d3deea 1px, transparent 1px); background-size: 22px 22px; }
 .card .kicker { font: 700 12px/1 var(--body); text-transform: uppercase; letter-spacing: 0.12em; color: var(--red); margin: 0; }
 .card h2 { font: 800 30px/1.1 var(--display); margin: 0; }
@@ -62,3 +62,25 @@ button.big { width: 100%; min-height: 52px; font-size: 18px; }
 .card button:not(.main) { background: #fff; color: #2b2a27; border-color: #cfc9bb; }
 .choices { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+
+.fatal { position: fixed; left: 12px; right: 12px; top: calc(12px + env(safe-area-inset-top, 0px)); z-index: 20; margin: 0; padding: 12px 14px; border-radius: 12px; background: #7f1d1d; color: #fff; font: 600 14px/1.4 var(--body); }
+
+/* Pantallas bajas (móvil en horizontal): portada compacta y marcador en una fila */
+@media (max-height: 520px) {
+  .cover { max-width: 560px; padding: 16px 18px 16px 28px; display: grid; grid-template-columns: 1fr 1fr; column-gap: 18px; align-items: center; }
+  .cover .label, .cover h1, .cover .sub { grid-column: 1; }
+  .cover h1 { font-size: 40px; }
+  .cover .sub { margin-bottom: 0; }
+  .cover #play { grid-column: 2; grid-row: 1 / span 3; }
+  .cover .best { grid-column: 1 / -1; }
+  .how { display: none; }
+  .hud { flex-direction: row; align-items: center; padding: 4px 12px; gap: 14px; }
+  .hud .row2 { flex: 1; }
+}
+/* Tablet: todo un poco más grande */
+@media (min-width: 700px) and (min-height: 600px) {
+  .cover { max-width: 440px; padding: 32px 28px 26px 40px; }
+  .cover h1 { font-size: 64px; }
+  .hud { padding: 10px 18px; }
+  .page-n, .score { font-size: 24px; }
+}

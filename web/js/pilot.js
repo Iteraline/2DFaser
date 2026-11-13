@@ -1,6 +1,6 @@
 // Piloto automático: sigue la solución de la página. Lo usan la pantalla de título (modo demostración) y las pruebas.
-import { queue as input, blotXY } from './game.js';
-import { dirTo, cx, cy } from './maze.js';
+import { queue as input, blotXY } from './game.js?v=3';
+import { dirTo, cx, cy } from './maze.js?v=3';
 
 export const newPilot = () => ({ i: 0, wait: 0 });
 

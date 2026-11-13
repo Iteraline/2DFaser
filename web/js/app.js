@@ -1,12 +1,12 @@
 // Flujo de la partida: título (con demostración automática) → páginas 1-10 → fin. Bucle en tiempo real.
-import { makePage } from './maze.js';
-import { newGame, update, input, pageScore, medal } from './game.js';
-import { View, icon } from './draw.js';
-import { newPilot, pilot } from './pilot.js';
-import { PAGES, LIVES, ITEM } from './data.js';
-import { newSeed } from './rng.js';
-import { cy } from './maze.js';
-import * as store from './store.js';
+import { makePage } from './maze.js?v=3';
+import { newGame, update, input, pageScore, medal } from './game.js?v=3';
+import { View, icon } from './draw.js?v=3';
+import { newPilot, pilot } from './pilot.js?v=3';
+import { PAGES, LIVES, ITEM } from './data.js?v=3';
+import { newSeed } from './rng.js?v=3';
+import { cy } from './maze.js?v=3';
+import * as store from './store.js?v=3';
 
 const $ = (id) => document.getElementById(id);
 const view = new View($('cv'));
@@ -140,6 +140,15 @@ function startDemo() {
 // ---------- Bucle ----------
 let last = performance.now();
 function frame(now) {
+  try { step(now); } catch (e) { showFatal(e); return; }
+  requestAnimationFrame(frame);
+}
+function showFatal(e) {
+  const f = document.getElementById('fatal');
+  f.hidden = false; f.textContent = 'Error: ' + (e && e.message ? e.message : e) + ' — recarga la página.';
+  console.error(e);
+}
+function step(now) {
   const dt = Math.min(0.05, (now - last) / 1000); last = now;
   if (mode === 'title' && demo) {
     pilot(demo.g, demo.st); update(demo.g, dt);
@@ -155,7 +164,6 @@ function frame(now) {
     }
     view.draw(g, dt);
   }
-  requestAnimationFrame(frame);
 }
 requestAnimationFrame(frame);
 
@@ -191,5 +199,7 @@ $('play').onclick = startRun;
 
 toTitle();
 if ('serviceWorker' in navigator && !/^(localhost|127\.)/.test(location.hostname)) navigator.serviceWorker.register('/sw.js').catch(() => {});
+// Si al abrir el juego hay pantallas en reposo del sistema o se gira el móvil, recolocar.
+window.addEventListener('orientationchange', () => setTimeout(() => view.resize(), 250));
 // Para las pruebas automáticas
 window.__game = { get g() { return g; }, get run() { return run; }, get mode() { return mode; }, view, newPilot };

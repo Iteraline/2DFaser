@@ -1,7 +1,7 @@
 // Generador de páginas (laberinto + símbolos) y resolutor. Puro y con semilla: misma semilla → misma página.
 // Celda c = y*W + x. Muros por celda en bits: N=1, E=2, S=4, O=8 (bit puesto = hay muro).
-import { rng } from './rng.js';
-import { PAGES } from './data.js';
+import { rng } from './rng.js?v=3';
+import { PAGES } from './data.js?v=3';
 
 export const DX = [0, 1, 0, -1], DY = [-1, 0, 1, 0];
 export const opp = (d) => (d + 2) % 4;

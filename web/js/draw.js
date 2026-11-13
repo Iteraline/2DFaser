@@ -1,9 +1,13 @@
 // Dibujo en canvas: cuaderno de cuadros, muros a lápiz con temblor, trazo rojo, goma, lápiz, iconos y paso de página.
-import { cx, cy, nb, pk, open, DX, DY } from './maze.js';
-import { pencilXY, radius, blotXY } from './game.js';
-import { PORTAL_COLORS } from './data.js';
+import { cx, cy, nb, pk, open, DX, DY } from './maze.js?v=3';
+import { pencilXY, radius, blotXY } from './game.js?v=3';
+import { PORTAL_COLORS } from './data.js?v=3';
 
 const PAPER = '#fbf8ef', GRID = '#d3deea', MARGIN = '#e9a3a3', WALL = '#3b3a37', INK = '#d23a33', INK_OLD = 'rgba(210,58,51,0.35)';
+// Safari antiguo sin roundRect: versión sencilla.
+if (typeof CanvasRenderingContext2D !== 'undefined' && !CanvasRenderingContext2D.prototype.roundRect) {
+  CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) { r = Math.min(+r || 0, w / 2, h / 2); this.moveTo(x + r, y); this.arcTo(x + w, y, x + w, y + h, r); this.arcTo(x + w, y + h, x, y + h, r); this.arcTo(x, y + h, x, y, r); this.arcTo(x, y, x + w, y, r); this.closePath(); };
+}
 const hash = (a, b) => { let h = (a * 374761393 + b * 668265263) >>> 0; h = (h ^ (h >>> 13)) * 1274126177 >>> 0; return ((h ^ (h >>> 16)) >>> 0) / 4294967296; };
 
 // ---------- Iconos (también se usan en el marcador HTML) ----------
@@ -72,6 +76,7 @@ export class View {
   }
   resize() {
     const r = this.cv.parentElement.getBoundingClientRect(), dpr = Math.min(window.devicePixelRatio || 1, 2);
+    if (r.width < 2 || r.height < 2) { requestAnimationFrame(() => this.resize()); return; }
     this.w = r.width; this.h = r.height; this.dpr = dpr;
     this.cv.width = Math.round(r.width * dpr); this.cv.height = Math.round(r.height * dpr);
     this.cs = Math.max(30, Math.min(64, Math.min(r.width / 9, r.height / 11)));

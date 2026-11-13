@@ -14,7 +14,24 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="theme-color" content="#1b1d24">
 <link rel="preload" href="/fonts/bricolage-grotesque-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/css/app.css">
+<script>
+/* Limpieza única por versión: quita service workers y cachés de versiones anteriores (incluida la del juego anterior)
+   para que el navegador no mezcle archivos viejos y nuevos. */
+(function () {
+  const V = '3';
+  try {
+    if (localStorage.getItem('alapiz.ver') === V || !('serviceWorker' in navigator)) return;
+    localStorage.setItem('alapiz.ver', V);
+    navigator.serviceWorker.getRegistrations().then(function (rs) {
+      const had = rs.length > 0;
+      rs.forEach(function (r) { r.unregister(); });
+      const done = function () { if (had) location.reload(); };
+      if (window.caches) caches.keys().then(function (ks) { return Promise.all(ks.map(function (k) { return caches.delete(k); })); }).then(done, done); else done();
+    });
+  } catch (e) { /* sin almacenamiento: seguir */ }
+})();
+</script>
+<link rel="stylesheet" href="/css/app.css?v=3">
 </head>
 <body>
 <main class="app">
@@ -59,6 +76,8 @@
   </div>
 </div>
 
-<script type="module" src="/js/app.js"></script>
+<p id="fatal" class="fatal" hidden></p>
+<script>window.addEventListener('error', function (e) { var m = String(e.message || ''); if (!m || /ResizeObserver|Script error/.test(m)) return; var f = document.getElementById('fatal'); if (f) { f.hidden = false; f.textContent = 'Error: ' + m + ' — recarga la página.'; } });</script>
+<script type="module" src="/js/app.js?v=3"></script>
 </body>
 </html>

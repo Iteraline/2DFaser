@@ -25,6 +25,8 @@ Repo `Iteraline/2DFaser` (antes se usó para un prototipo de estrategia, archiva
 | `tools/qa/game.test.mjs` | Reglas + 1.500 páginas generadas (todas resolubles; el piloto las termina) |
 | `tools/qa/sim.mjs` | Dificultad: un explorador sin mapa juega 100 páginas de cada nivel |
 | `tools/qa/smoke.mjs` | Chromium (iPhone e iPad): portada, deslizar y partida completa |
+| `tools/qa/responsive.mjs` | Maqueta en 7 tamaños de iPhone/iPad, en vertical y horizontal |
+| `tools/stamp.mjs` | Versión en todos los archivos antes de publicar |
 
 ## Probar
 
